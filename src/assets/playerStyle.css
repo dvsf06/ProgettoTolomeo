@@ -1,0 +1,143 @@
+.audio-player {
+    background: #aaa;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 1.2%;
+    max-width: 90vw;
+    margin: 1rem auto;
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-right: 30px;
+    float: left;
+}
+
+.track-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    margin-right: 1rem;
+    object-fit: cover;
+}
+
+.progress-bar {
+    height: 6px;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    margin: 1rem 0;
+}
+
+.progress {
+    height: 100%;
+    background-color: #0d6efd;
+    border-radius: 3px;
+    width: 45%;
+    transition: width 0.1s linear;
+}
+
+.progress-handle {
+    width: 16px;
+    height: 16px;
+    background-color: #0d6efd;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.progress-handle:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.control-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6c757d;
+    transition: all 0.2s ease;
+}
+
+.control-button:hover {
+    color: #0d6efd;
+}
+
+.play-button {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #0d6efd;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.play-button:hover {
+    transform: scale(1.1);
+    background-color: #0b5ed7;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.volume-slider {
+    width: 80px;
+    height: 4px;
+    background-color: #e9ecef;
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.volume-level {
+    height: 100%;
+    background-color: #0d6efd;
+    border-radius: 2px;
+    width: 70%;
+}
+
+.time-info {
+    color: #6c757d;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+
+.marquee {
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+
+.marquee span {
+    display: inline-block;
+    animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md">
+<nav class="navbar fixed-top navbar-expand-md z-10">
     <div class="container-fluid">
         <a class="navbar-brand" href="home.php">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContents" aria-controls="#navbarContents" aria-expanded="false">
