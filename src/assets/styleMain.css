@@ -7,3 +7,8 @@
     padding: 0 20px;
     width: min(60vw, 90%);
 }
+
+.mainTitle {
+    padding: 20px 0 !important;
+    text-align: center !important;
+}

@@ -4,54 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/styleMain.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
     <?php include 'shared/navbar.php'?>
     <div class="container-md">
+        <h1 class="mainTitle" style="text-align: center;">Le tue playlist</h1>
         <div class="row g-1 justify-content-evenly">
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="p-3">
                     <?php include 'shared/contentCard.php'?>
                 </div>  
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="p-3">
                     <?php include 'shared/contentCard.php'?>
                 </div>  
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="p-3">
                     <?php include 'shared/contentCard.php'?>
                 </div>  
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="p-3">
                     <?php include 'shared/contentCard.php'?>
                 </div>  
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="p-3">
                     <?php include 'shared/contentCard.php'?>
                 </div>  
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="p-3">
                     <?php include 'shared/contentCard.php'?>
                 </div>  
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="p-3">
                     <?php include 'shared/contentCard.php'?>
                 </div>  
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="p-3">
-                    <?php include 'shared/contentCard.php'?>
-                </div>  
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="p-3">
                     <?php include 'shared/contentCard.php'?>
                 </div>  

@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" style="max-width: 200px !important; margin: 0 auto !important;">
     <img src="https://placehold.co/100" class="card-img-top">
     <div class="card-body">
         <h5 class="card-title">Playlist title</h5>
