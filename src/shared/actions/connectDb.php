@@ -4,12 +4,11 @@
 
     try {
         $dsn = "mysql:host=$host;dbname=$db;charset=utf8";
-        $pdo = new PDO($dsn);
+        $db = new PDO($dsn, "root", "");
 
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Connesso al db";
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     } catch (PDOException $e) {
-        echo "Error while connecting to database: " . $e->getMessage();
+        exit("Error while connecting to database: " . $e->getMessage());
     }
 ?>

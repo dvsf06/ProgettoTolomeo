@@ -5,7 +5,7 @@ CREATE TABLE tblUtenti (
     idUtente INTEGER PRIMARY KEY AUTO_INCREMENT,
     username CHAR(50) NOT NULL,
     email VARCHAR(320) NOT NULL,
-    passwordHash CHAR(64) NOT NULL
+    passwordHash CHAR(60) NOT NULL
 );
 
 CREATE TABLE tblPlaylists (

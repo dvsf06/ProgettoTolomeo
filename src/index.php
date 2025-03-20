@@ -9,17 +9,17 @@
 </head>
 <body>
     <div class="container-md">
-        <form class="formCenter">
+        <form class="formCenter" action="shared/actions/userHandling.php" method="POST">
             <div class="mb-3">
                 <label for="emailInput" class="form-label">Email</label>
-                <input type="email" class="form-control" id="emailInput" placeholder="name@example.com">
+                <input type="email" class="form-control" id="emailInput" name="email" placeholder="name@example.com">
             </div>
             <div class="mb-3">
                 <label for="passwordInput" class="form-label">Password</label>
-                <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                <input type="password" class="form-control" id="passwordInput" name="password" placeholder="Password">
             </div>
             <p>Non hai un account? <a href="registrazione.php">Registrati</a></p>
-            <button type="submit" class="btn btn-primary">Accedi</button>
+            <button type="submit" class="btn btn-primary" name="accesso" value="1">Accedi</button>
         </form>
     </div>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
