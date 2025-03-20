@@ -15,46 +15,17 @@
     <div class="container-md">
         <h1 class="mainTitle" style="text-align: center;">Le tue playlist</h1>
         <div class="row g-1 justify-content-evenly">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="p-3">
-                    <?php include 'shared/contentCard.php'?>
-                </div>  
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="p-3">
-                    <?php include 'shared/contentCard.php'?>
-                </div>  
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="p-3">
-                    <?php include 'shared/contentCard.php'?>
-                </div>  
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="p-3">
-                    <?php include 'shared/contentCard.php'?>
-                </div>  
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="p-3">
-                    <?php include 'shared/contentCard.php'?>
-                </div>  
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="p-3">
-                    <?php include 'shared/contentCard.php'?>
-                </div>  
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="p-3">
-                    <?php include 'shared/contentCard.php'?>
-                </div>  
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="p-3">
-                    <?php include 'shared/contentCard.php'?>
-                </div>  
-            </div>
+            <?php include 'shared/contentCard.php'?>
+            <?php include 'shared/contentCard.php'?>
+            <?php include 'shared/contentCard.php'?>
+            <?php include 'shared/contentCard.php'?>
+            <?php include 'shared/contentCard.php'?>
+            <?php include 'shared/contentCard.php'?>
+            <?php include 'shared/contentCard.php'?>
+            <?php include 'shared/contentCard.php'?>
+            <?php include 'shared/contentCard.php'?>
+            <?php include 'shared/contentCard.php'?>
+            <?php include 'shared/contentCard.php'?>
         </div>
     </div>
     <?php include 'shared/footer.php'?>
