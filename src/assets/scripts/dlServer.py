@@ -1,0 +1,111 @@
+import subprocess
+import sys # for sys.executable (The file path of the currently using python)
+import shutil
+import requests
+import glob
+import os
+import socket
+import json
+null = None
+true = True
+false = False
+
+#os.system("pipx run spotdl moneyfornothing")
+
+def api_auth():
+    CLIENT_ID = "7830ddbbbf3043a6a3ebab4273d26205"
+    CLIENT_SECRET = "4d97877ff89b42aab9679e09c32fb8b8"
+    auth_url = "https://accounts.spotify.com/api/token"
+    auth_payload = {
+        "grant_type": "client_credentials",
+        "client_id": CLIENT_ID,
+        "client_secret": CLIENT_SECRET
+    }
+    resp = requests.post(auth_url, data=auth_payload)
+    print(resp.status_code)
+    auth_data = eval(resp.text)
+    return auth_data["access_token"]
+
+def dl_from_id(id):
+    dl_link = "https://open.spotify.com/track/" + id
+    os.system("pipx run spotdl " + dl_link)
+    return 1
+
+def api_query(q):
+    search_url = "https://api.spotify.com/v1/search"
+    search_payload = {
+        "q": q,
+        "type": "track",
+        "limit": 10
+    }
+    search_headers = {
+        "Authorization": "Bearer " + api_auth()
+    }
+
+    resp = requests.get(search_url, params=search_payload, headers=search_headers)
+    print(resp.status_code)
+    query_data = eval(resp.text)
+    return query_data["tracks"]["items"]
+
+def route_song(song):
+    filename = ""
+
+    artists = song["artists"]
+    for artist in artists:
+        if filename == "":
+            filename = artist["name"]
+        else:
+            filename += ", " + artist["name"]
+    filename += " - " + song["name"] + ".mp3"
+
+    if not os.path.exists("../../../tracks/" + artists[0]["name"]):
+        os.makedirs("../../../tracks/" + artists[0]["name"])
+
+    shutil.move(filename, "../../../tracks/" + artists[0]["name"] + "/" + filename)
+
+def handle_request(d):
+    if(d["action"] == "search"):
+        print("search requested")
+        search_url = "https://api.spotify.com/v1/search"
+        search_payload = {
+            "q": d["data"],
+            "type": "track",
+            "limit": 10
+        }
+        search_headers = {
+            "Authorization": "Bearer " + api_auth()
+        }
+
+        resp = requests.get(search_url, params=search_payload, headers=search_headers)
+        print(resp.status_code)
+        query_data = eval(resp.text)
+        response_data = {
+            "items": query_data["tracks"]["items"]
+        }
+        response_string = json.dumps(response_data)
+        print(response_string)
+        conn_sock.send((response_string + "\n").encode())
+        conn_sock.close()
+    if(d["action"] == "download"):
+        print("download requested")
+        dl_from_id(d["data"])
+        route_song(api_query(d["title"])[0])
+        conn_sock.send(("200" + "\n").encode())
+        conn_sock.close()
+
+
+hostname = "192.168.1.11"
+port = 8000
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.bind((hostname, port))
+sock.listen(5)
+
+while True:
+    conn_sock, addr = sock.accept()
+    print(f"Connection from {addr}")
+    data = conn_sock.recv(1024)
+    data = str(data).strip("b'")
+    data = json.loads(data)
+    print(data)
+    handle_request(data)
