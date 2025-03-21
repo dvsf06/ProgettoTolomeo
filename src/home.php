@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    //echo $_SESSION["idUtente"];
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>

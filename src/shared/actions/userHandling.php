@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include 'connectDb.php';
 
     if(isset($_POST["registrazione"])){
@@ -47,6 +48,8 @@
                 exit('Utente non esistente, <a href="../../registrazione.php">registrati</a>');
             }
             if(password_verify($password, $result[0]["passwordHash"])){
+                $_SESSION["idUtente"] = $result[0]["idUtente"];
+                header("Location: ../../home.php");
                 exit("Accesso eseguito, ciao ".$result[0]["username"]);
             }
             else{
