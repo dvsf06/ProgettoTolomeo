@@ -23,7 +23,7 @@
             $query->execute();
             $resultDb = $query->fetchAll(PDO::FETCH_ASSOC);
             
-            $host = "192.168.1.11";
+            $host = "192.168.30.171";
             $port = 8000;
             $socket = socket_create(AF_INET, SOCK_STREAM, 0);
             $res = socket_connect($socket, $host, $port);
@@ -54,7 +54,7 @@
     }
 
     if(isset($_GET["download"])){
-        $host = "192.168.1.11";
+        $host = "192.168.30.171";
         $port = 8000;
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $res = socket_connect($socket, $host, $port);
@@ -81,11 +81,17 @@
                 $filename .= " - " . $songAssoc["name"] . ".mp3";
             }
 
+            $nomeArtista = $songAssoc["artists"][0]["name"];
+
             $titolo = $songAssoc["name"];
             $durata = $songAssoc["duration_ms"];
             $percorsoFile = "tracks/" . $songAssoc["artists"][0]["name"] . "/" . $filename;
-            $artistaId = 1;
 
+            $query = $db->prepare("INSERT INTO tblArtisti (nome) VALUES (:nomeArtista)");
+            $query->bindParam(":nomeArtista", $nomeArtista);
+            $query->execute();
+
+            $artistaId = $db->lastInsertId();
 
             $query = $db->prepare("INSERT INTO tblBrani (titolo, durata, percorsoFile, artistaId) VALUES (:titolo, :durata, :percorsoFile, :artistaId)");
             $query->bindParam(":titolo", strtolower($titolo));

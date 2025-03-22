@@ -1,26 +1,26 @@
 CREATE DATABASE IF NOT EXISTS dbForseSpotify;
 USE dbForseSpotify;
 
-CREATE TABLE tblUtenti (
+CREATE TABLE IF NOT EXISTS tblUtenti (
     idUtente INTEGER PRIMARY KEY AUTO_INCREMENT,
     username CHAR(50) NOT NULL,
     email VARCHAR(320) NOT NULL,
     passwordHash CHAR(60) NOT NULL
 );
 
-CREATE TABLE tblPlaylists (
+CREATE TABLE IF NOT EXISTS tblPlaylists (
     idPlaylist INTEGER PRIMARY KEY AUTO_INCREMENT,
     nome CHAR(50) NOT NULL,
     utenteId INTEGER NOT NULL,
     FOREIGN KEY (utenteId) REFERENCES tblUtenti(idUtente)
 );
 
-CREATE TABLE tblArtisti (
+CREATE TABLE IF NOT EXISTS tblArtisti (
     idArtista INTEGER PRIMARY KEY AUTO_INCREMENT,
     nome CHAR(50) NOT NULL
 );
 
-CREATE TABLE tblBrani (
+CREATE TABLE IF NOT EXISTS tblBrani (
     idBrano INTEGER PRIMARY KEY AUTO_INCREMENT,
     titolo CHAR(50) NOT NULL,
     durata INTEGER NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE tblBrani (
     FOREIGN KEY (artistaId) REFERENCES tblArtisti(idArtista)
 );
 
-CREATE TABLE tblBraniPlaylist (
+CREATE TABLE IF NOT EXISTS tblBraniPlaylist (
     idBranoPlaylist INTEGER PRIMARY KEY AUTO_INCREMENT,
     branoId INTEGER NOT NULL,
     playlistId INTEGER NOT NULL,

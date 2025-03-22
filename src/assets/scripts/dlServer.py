@@ -88,13 +88,14 @@ def handle_request(d):
         conn_sock.close()
     if(d["action"] == "download"):
         print("download requested")
+        print(d["data"])
         dl_from_id(d["data"])
         route_song(api_query(d["title"])[0])
         conn_sock.send(("200" + "\n").encode())
         conn_sock.close()
 
 
-hostname = "192.168.1.11"
+hostname = "192.168.30.171"
 port = 8000
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
