@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarContents">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">        
-                    <a class="nav-link">Link</a>
+                    <a class="nav-link" href="libreria.php">Libreria</a>
                 </li>
             </ul>
             <form class="d-flex" role="search" action="search.php" method="GET">
