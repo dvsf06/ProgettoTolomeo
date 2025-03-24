@@ -28,7 +28,7 @@ def api_auth():
 
 def dl_from_id(id):
     dl_link = "https://open.spotify.com/track/" + id
-    os.system("pipx run spotdl " + dl_link)
+    os.system("spotdl " + dl_link)
     return 1
 
 def api_query(q):
@@ -83,7 +83,6 @@ def handle_request(d):
             "items": query_data["tracks"]["items"]
         }
         response_string = json.dumps(response_data)
-        print(response_string)
         conn_sock.send((response_string + "\n").encode())
         conn_sock.close()
     if(d["action"] == "download"):
@@ -95,7 +94,7 @@ def handle_request(d):
         conn_sock.close()
 
 
-hostname = "192.168.30.171"
+hostname = "192.168.1.225"
 port = 8000
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -106,7 +105,8 @@ while True:
     conn_sock, addr = sock.accept()
     print(f"Connection from {addr}")
     data = conn_sock.recv(1024)
-    data = str(data).strip("b'")
+    data = str(
+    data).strip("b'")
     data = json.loads(data)
     print(data)
     handle_request(data)

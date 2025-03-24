@@ -18,12 +18,12 @@
     if(isset($_GET["search"])){
         try{
             $titolo = strtolower($_GET["titolo"]);
-            $query = $db->prepare("SELECT * FROM tblBrani WHERE titolo = :titolo");
+            $query = $db->prepare("SELECT * FROM tblBrani INNER JOIN tblArtisti ON tblBrani.artistaId = tblArtisti.idArtista WHERE titolo = :titolo");
             $query->bindParam(":titolo", $titolo);
             $query->execute();
             $resultDb = $query->fetchAll(PDO::FETCH_ASSOC);
             
-            $host = "192.168.30.171";
+            $host = "192.168.1.225";
             $port = 8000;
             $socket = socket_create(AF_INET, SOCK_STREAM, 0);
             $res = socket_connect($socket, $host, $port);
@@ -39,7 +39,7 @@
 
             foreach ($resultApi["items"] as $itemApi){
                 foreach ($resultDb as $itemDb){
-                    if(strtolower($itemApi["name"]) == $itemDb["titolo"]){      //nn funge                   
+                    if(strtolower($itemApi["name"]) == $itemDb["titolo"] && $itemApi["artists"][0]["name"] == $itemDb["nome"]){                  
                         $resultApi["items"][array_search($itemApi, $resultApi["items"])]["downloaded"] = true;
                     }
                 }
@@ -54,7 +54,7 @@
     }
 
     if(isset($_GET["download"])){
-        $host = "192.168.30.171";
+        $host = "192.168.1.225";
         $port = 8000;
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $res = socket_connect($socket, $host, $port);
@@ -87,18 +87,37 @@
             $durata = $songAssoc["duration_ms"];
             $percorsoFile = "tracks/" . $songAssoc["artists"][0]["name"] . "/" . $filename;
 
-            $query = $db->prepare("INSERT INTO tblArtisti (nome) VALUES (:nomeArtista)");
-            $query->bindParam(":nomeArtista", $nomeArtista);
+            $query = $db->prepare("SELECT * FROM tblArtisti WHERE nome = :artistaNome");
+            $query-> bindParam(":artistaNome", $nomeArtista);
             $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            
+            $artistaId = -1;
 
-            $artistaId = $db->lastInsertId();
+            if($result[0]["nome"] == $nomeArtista){
+                $artistaId = $result[0]["idArtista"];
+            }
+            else{
+                $query = $db->prepare("INSERT INTO tblArtisti (nome) VALUES (:nomeArtista)");
+                $query->bindParam(":nomeArtista", $nomeArtista);
+                $query->execute();
 
-            $query = $db->prepare("INSERT INTO tblBrani (titolo, durata, percorsoFile, artistaId) VALUES (:titolo, :durata, :percorsoFile, :artistaId)");
-            $query->bindParam(":titolo", strtolower($titolo));
-            $query->bindParam(":durata", $durata);
-            $query->bindParam(":percorsoFile", $percorsoFile);
-            $query->bindParam(":artistaId", $artistaId);
-            $query->execute();
+                $artistaId = $db->lastInsertId();
+            }   
+
+            if($artistaId != -1){
+                $lowerTitolo = strtolower($titolo);
+                $query = $db->prepare("INSERT INTO tblBrani (titolo, durata, percorsoFile, artistaId) VALUES (:titolo, :durata, :percorsoFile, :artistaId)");
+                $query->bindParam(":titolo", $lowerTitolo);
+                $query->bindParam(":durata", $durata);
+                $query->bindParam(":percorsoFile", $percorsoFile);
+                $query->bindParam(":artistaId", $artistaId);
+                $query->execute();
+            }
+            else{
+                throw new Exception("Error on artist Id");
+            }
+            
 
         }
         catch (PDOException $e){
