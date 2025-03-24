@@ -49,6 +49,7 @@
             }
             if(password_verify($password, $result[0]["passwordHash"])){
                 $_SESSION["idUtente"] = $result[0]["idUtente"];
+                setcookie("idUtente", $result[0]["idUtente"]);
                 header("Location: ../../home.php");
                 exit("Accesso eseguito, ciao ".$result[0]["username"]);
             }

@@ -1,6 +1,19 @@
 <?php
     include "connectDb.php";
 
+    if(isset($_GET["createPlaylist"])){
+        try{
+            $query = $db->prepare("INSERT INTO tblPlaylists (nome, utenteId) VALUES (:nome, :utenteId)");
+            $query -> bindParam(":nome", $_GET["name"]);
+            $query -> bindParam(":utenteId", $_GET["idUser"]);
+            $query -> execute();
+            echo '200';
+        }
+        catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
     if(isset($_GET["getUserPlaylists"])){
         try{
             $query = $db->prepare("SELECT tblPlaylists.* FROM tblPlaylists INNER JOIN tblUtenti ON tblPlaylists.utenteId = tblUtenti.idUtente WHERE tblUtenti.idUtente = :userId");

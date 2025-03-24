@@ -1,17 +1,20 @@
 window.onload = async () => {
     idUtente = getCookie("idUtente");
-    console.log("Utente loggato: " + idUtente);
     var resp = await makeRequest("shared/actions/dataSource.php?getUserPlaylists=1", idUtente);
     console.log(resp);
 
     if(resp.length == 0){
-        document.getElementById("mainContainer").innerHTML = "";
+        content = '<h1 class="mainTitle" style="text-align: center;">Le tue playlist</h1><div class="row g-1 justify-content-evenly">';
+        content += '<div class="col-lg-3 col-md-6 col-sm-6"><div class="p-3"><div class="card" style="max-width: 200px !important; margin: 0 auto !important;"><img src="https://cdn3.iconfinder.com/data/icons/hiyoris-ui-0-0/24/Artboard_40-512.png" class="card-img-top"><div class="card-body"><h5 class="card-title">Nuova playlists</h5><a href="newPlaylist.php" class="btn btn-primary">Crea una playlist</a></div></div></div></div>';
+        content += '</div>';
+        document.getElementById("mainContainer").innerHTML = content;
     }
     else{
-        content = '<h1 class="mainTitle" style="text-align: center;">Suggeriti</h1><div class="row g-1 justify-content-evenly">';
+        content = '<h1 class="mainTitle" style="text-align: center;">Le tue playlist</h1><div class="row g-1 justify-content-evenly">';
         resp.forEach(element => {
             content += '<div class="col-lg-3 col-md-6 col-sm-6"><div class="p-3"><div class="card" style="max-width: 200px !important; margin: 0 auto !important;"><img src="https://placehold.co/100" class="card-img-top"><div class="card-body"><h5 class="card-title">' + element.nome + '</h5><p class="card-text">Author</p><a class="btn btn-primary">Apri playlist</a></div></div></div></div>';
         });
+        content += '<div class="col-lg-3 col-md-6 col-sm-6"><div class="p-3"><div class="card" style="max-width: 200px !important; margin: 0 auto !important;"><img src="https://cdn3.iconfinder.com/data/icons/hiyoris-ui-0-0/24/Artboard_40-512.png" class="card-img-top"><div class="card-body"><h5 class="card-title">Nuova playlists</h5><a href="newPlaylist.php" class="btn btn-primary">Crea una playlist</a></div></div></div></div>';
         content += '</div>';
         document.getElementById("mainContainer").innerHTML = content;
 
