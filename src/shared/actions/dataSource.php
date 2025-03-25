@@ -52,8 +52,10 @@
 
             foreach ($resultApi["items"] as $itemApi){
                 foreach ($resultDb as $itemDb){
-                    if(strtolower($itemApi["name"]) == $itemDb["titolo"] && $itemApi["artists"][0]["name"] == $itemDb["nome"]){                  
-                        $resultApi["items"][array_search($itemApi, $resultApi["items"])]["downloaded"] = true;
+                    if(strtolower($itemApi["name"]) == $itemDb["titolo"] && $itemApi["artists"][0]["name"] == $itemDb["nome"]){        
+                        $itemId = array_search($itemApi, $resultApi["items"]);     
+                        $resultApi["items"][$itemId]["downloaded"] = true;
+                        $resultApi["items"][$itemId]["dbId"] = $itemDb["idBrano"];
                     }
                 }
             }
@@ -128,7 +130,7 @@
                 $query->execute();
             }
             else{
-                throw new Exception("Error on artist Id");
+                throw new Exception("Error on artist Id dataSource.php:133");
             }
             
 
@@ -137,5 +139,22 @@
             echo "Error: " . $e->getMessage();
         }
         echo $resultApi;
+    }
+
+    if(isset($_GET["addToPlaylist"])){
+        $playlistId = $_GET["idPlaylist"];
+        $branoId = $_GET["idBrano"];
+
+        try{
+            $query = $db -> prepare("INSERT INTO tblBraniPlaylist (playlistId, branoId) VALUES (:playlistId, :branoId)");
+            $query -> bindParam(":playlistId", $playlistId);
+            $query -> bindParam(":branoId", $branoId);
+            $query -> execute();
+
+            echo "200";
+        }
+        catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
     }
 ?>
