@@ -1,5 +1,6 @@
 <div class="container fixed-bottom z-10">
     <div class="audio-player">
+        <audio src='../tracks/Carlo Buti/Carlo Buti - Faccetta nera.mp3' preload=”metadata” loop></audio>
         <!-- Track Info -->
         <div class="track-info">
             <img src="https://images.unsplash.com/photo-1616089883149-a928483f3953?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxMb3N0JTIwaW4lMjB0aGUlMjBFY2hvZXMlMjAlMjhmZWF0LiUyMFN5bXBob255JTI5fGVufDB8MHx8fDE3MzQ4OTQwNjd8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="Album Cover" class="track-image">
@@ -12,15 +13,12 @@
         </div>
 
         <!-- Progress Bar -->
-        <div class="progress-bar">
-            <div class="progress"></div>
-            <div class="progress-handle"></div>
-        </div>
+        <input type="range" class="progress-bar" id="seek-slider">
 
         <!-- Time Info -->
         <div class="d-flex justify-content-between time-info">
-            <span>2:45</span>
-            <span>4:30</span>
+            <span id="currentTime">0:00</span>
+            <span id="durationIndicator">4:30</span>
         </div>
 
         <!-- Controls -->
@@ -31,7 +29,7 @@
             <button class="control-button">
                 <i class="fas fa-step-backward fa-md"></i>
             </button>
-            <button class="play-button">
+            <button class="play-button" id="play-button">
                 <i class="fas fa-play fa-md"></i>
             </button>
             <button class="control-button">
@@ -49,6 +47,7 @@
     </div>
 </div>
 
+<script src="assets/scripts/playerScript.js"></script>
 <script>
     // Toggle play/pause button
     const playButton = document.querySelector('.play-button');
