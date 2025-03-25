@@ -14,7 +14,7 @@ async function searchClick(query, isFromPHP) {
     resp["items"].forEach(element => {
         if(element["downloaded"]){
             uriElement = encodeURIComponent(JSON.stringify(element));
-            document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["album"]["images"][0]["url"] + '"></td><td>' + element["name"] + '</td><td>' + element["artists"][0]["name"] + '</td><td>' + millisToMinutesAndSeconds(element["duration_ms"]) + '</td><td><button class="btn btn-primary">Play icon</button></td><td><button class="btn btn-success" onclick="addToPlaylistClick(\'' + uriElement + '\')">Add to playlist</button></td></tr>';
+            document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["album"]["images"][0]["url"] + '"></td><td>' + element["name"] + '</td><td>' + element["artists"][0]["name"] + '</td><td>' + millisToMinutesAndSeconds(element["duration_ms"]) + '</td><td><button class="btn btn-primary" onclick="playTrack(\''+ uriElement + '\')">Play icon</button></td><td><button class="btn btn-success" onclick="addToPlaylistClick(\'' + uriElement + '\')">Add to playlist</button></td></tr>';
         }
         else{
             uriElement = encodeURIComponent(JSON.stringify(element));
@@ -95,4 +95,11 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function playTrack(element){
+    var track = decodeURIComponent(element);
+    audioPath = JSON.parse(track)["audioPath"];
+    audio = document.querySelector("audio");
+    audio.src = "../" + audioPath;
 }

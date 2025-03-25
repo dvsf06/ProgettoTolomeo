@@ -56,6 +56,7 @@
                         $itemId = array_search($itemApi, $resultApi["items"]);     
                         $resultApi["items"][$itemId]["downloaded"] = true;
                         $resultApi["items"][$itemId]["dbId"] = $itemDb["idBrano"];
+                        $resultApi["items"][$itemId]["audioPath"] = $itemDb["percorsoFile"];
                     }
                 }
             }

@@ -1,4 +1,4 @@
-const audio = document.querySelector('audio');
+var audio = document.querySelector('audio');
 const durationIndicator = document.getElementById("durationIndicator");
 const seekSlider = document.getElementById('seek-slider');
 const currentTimeIndicator = document.getElementById('currentTime');
