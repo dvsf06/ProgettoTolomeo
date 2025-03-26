@@ -43,14 +43,8 @@ playIconContainer.addEventListener('click', () => {
     }
 });
 
-if (audio.readyState > 0) {
+audio.addEventListener('loadedmetadata', () => {
     displayDuration();
     setSliderMax();
     seekSlider.value = 0;
-} else {
-    audio.addEventListener('loadedmetadata', () => {
-      displayDuration();
-      setSliderMax();
-      seekSlider.value = 0;
-    });
-}
+});

@@ -3,10 +3,10 @@ var songToAddToPlaylist;
 
 async function searchClick(query, isFromPHP) {
     if(!isFromPHP){
-        var resp = await makeRequest("shared/actions/dataSource.php?search=1", document.getElementById("searchInput").value);
+        resp = await makeRequest("shared/actions/dataSource.php?search=1", document.getElementById("searchInput").value);
     }
     else{
-        var resp = await makeRequest("shared/actions/dataSource.php?search=1", query);
+        resp = await makeRequest("shared/actions/dataSource.php?search=1", query);
     }
     document.getElementById("risBrani").innerHTML = "";
     console.log(resp);
@@ -99,7 +99,17 @@ function getCookie(cname) {
 
 function playTrack(element){
     var track = decodeURIComponent(element);
-    audioPath = JSON.parse(track)["audioPath"];
+    trackObj = JSON.parse(track);
+    audioPath = trackObj["audioPath"];
+    coverLink = trackObj["coverImage"];
     audio = document.querySelector("audio");
+    var coverContainer = document.getElementById("coverContainer");
+    var nameContainer = document.getElementById("trackNameContainer");
+    var artistContainer = document.getElementById("artistNameContainer");
+    nameContainer.innerText = trackObj["name"];
+    artistContainer.innerText = trackObj["artists"][0]["name"];
+    coverContainer.src = coverLink;
     audio.src = "../" + audioPath;
+    playState="pause";
+    audio.play();
 }

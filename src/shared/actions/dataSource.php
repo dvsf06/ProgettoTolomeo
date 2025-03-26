@@ -36,7 +36,7 @@
             $query->execute();
             $resultDb = $query->fetchAll(PDO::FETCH_ASSOC);
             
-            $host = "192.168.1.225";
+            $host = "192.168.3.171";
             $port = 8000;
             $socket = socket_create(AF_INET, SOCK_STREAM, 0);
             $res = socket_connect($socket, $host, $port);
@@ -57,6 +57,7 @@
                         $resultApi["items"][$itemId]["downloaded"] = true;
                         $resultApi["items"][$itemId]["dbId"] = $itemDb["idBrano"];
                         $resultApi["items"][$itemId]["audioPath"] = $itemDb["percorsoFile"];
+                        $resultApi["items"][$itemId]["coverImage"] = $itemDb["coverImage"];
                     }
                 }
             }
@@ -70,11 +71,11 @@
     }
 
     if(isset($_GET["download"])){
-        $host = "192.168.1.225";
+        $host = "192.168.3.171";
         $port = 8000;
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $res = socket_connect($socket, $host, $port);
-        $sentString = '{"action":"download","data":"'.json_decode($_GET["song"],true)["id"].'","title":"'.json_decode($_GET["song"],true)["name"].'"}';
+        $sentString = '{"action":"download","data":"'.json_decode($_GET["song"],true)["id"].'","title":"'.json_decode($_GET["song"],true)["name"].'","artists":'.json_encode(json_decode($_GET["song"], true)["artists"]).'}';
         socket_write($socket, $sentString, strlen($sentString));
         $resultApi = "";
         while($resp = socket_read($socket, 1024)){
@@ -85,23 +86,14 @@
         try{
             $songAssoc = json_decode($_GET["song"], true);
 
-            $filename = "";
-            $artists = $songAssoc["artists"];
-            foreach ($artists as $artist){
-                if($filename == ""){
-                    $filename = $artist["name"];
-                }
-                else{
-                    $filename .= ", " . $artist["name"];
-                }
-                $filename .= " - " . $songAssoc["name"] . ".mp3";
-            }
+            $filename .= $songAssoc["name"] . ".mp3";
 
             $nomeArtista = $songAssoc["artists"][0]["name"];
 
             $titolo = $songAssoc["name"];
             $durata = $songAssoc["duration_ms"];
-            $percorsoFile = "tracks/" . $songAssoc["artists"][0]["name"] . "/" . $filename;
+            $percorsoFile = "tracks/" . $nomeArtista . "/" . $filename;
+            $coverImage = $songAssoc["album"]["images"][0]["url"];
 
             $query = $db->prepare("SELECT * FROM tblArtisti WHERE nome = :artistaNome");
             $query-> bindParam(":artistaNome", $nomeArtista);
@@ -123,11 +115,12 @@
 
             if($artistaId != -1){
                 $lowerTitolo = strtolower($titolo);
-                $query = $db->prepare("INSERT INTO tblBrani (titolo, durata, percorsoFile, artistaId) VALUES (:titolo, :durata, :percorsoFile, :artistaId)");
+                $query = $db->prepare("INSERT INTO tblBrani (titolo, durata, percorsoFile, artistaId, coverImage) VALUES (:titolo, :durata, :percorsoFile, :artistaId, :coverImage)");
                 $query->bindParam(":titolo", $lowerTitolo);
                 $query->bindParam(":durata", $durata);
                 $query->bindParam(":percorsoFile", $percorsoFile);
                 $query->bindParam(":artistaId", $artistaId);
+                $query->bindParam(":coverImage", $coverImage);
                 $query->execute();
             }
             else{

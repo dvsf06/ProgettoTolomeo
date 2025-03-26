@@ -47,21 +47,23 @@ def api_query(q):
     query_data = eval(resp.text)
     return query_data["tracks"]["items"]
 
-def route_song(song):
-    filename = ""
-
-    artists = song["artists"]
+def route_song(songName, artists):
+    newFilename = songName + ".mp3"
+    fileName = ""
     for artist in artists:
-        if filename == "":
-            filename = artist["name"]
+        if fileName == "":
+            fileName = artist["name"]
         else:
-            filename += ", " + artist["name"]
-    filename += " - " + song["name"] + ".mp3"
+            fileName += ", " + artist["name"]
+    fileName += " - " + songName + ".mp3"
 
-    if not os.path.exists("../../../tracks/" + artists[0]["name"]):
-        os.makedirs("../../../tracks/" + artists[0]["name"])
+    os.rename(fileName, newFilename)
 
-    shutil.move(filename, "../../../tracks/" + artists[0]["name"] + "/" + filename)
+    artistName = artists[0]["name"]
+    if not os.path.exists("../../../tracks/" + artistName):
+        os.makedirs("../../../tracks/" + artistName)
+
+    shutil.move(newFilename, "../../../tracks/" + artists[0]["name"] + "/" + newFilename)
 
 def handle_request(d):
     if(d["action"] == "search"):
@@ -88,13 +90,14 @@ def handle_request(d):
     if(d["action"] == "download"):
         print("download requested")
         print(d["data"])
+        print(d["artists"])
         dl_from_id(d["data"])
-        route_song(api_query(d["title"])[0])
+        route_song(d["title"], d["artists"])
         conn_sock.send(("200" + "\n").encode())
         conn_sock.close()
 
 
-hostname = "192.168.1.225"
+hostname = "192.168.3.171"
 port = 8000
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -104,9 +107,8 @@ sock.listen(5)
 while True:
     conn_sock, addr = sock.accept()
     print(f"Connection from {addr}")
-    data = conn_sock.recv(1024)
-    data = str(
-    data).strip("b'")
+    data = conn_sock.recv(100000)
+    data = str(data).strip("b'")
     data = json.loads(data)
     print(data)
     handle_request(data)

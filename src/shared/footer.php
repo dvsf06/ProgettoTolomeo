@@ -3,12 +3,12 @@
         <audio src='../tracks/Carlo Buti/Carlo Buti - Faccetta nera.mp3' preload=”metadata” loop></audio>
         <!-- Track Info -->
         <div class="track-info">
-            <img src="https://images.unsplash.com/photo-1616089883149-a928483f3953?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxMb3N0JTIwaW4lMjB0aGUlMjBFY2hvZXMlMjAlMjhmZWF0LiUyMFN5bXBob255JTI5fGVufDB8MHx8fDE3MzQ4OTQwNjd8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="Album Cover" class="track-image">
+            <img src="" alt="Album Cover" class="track-image" id="coverContainer">
             <div>
-                <div class="marquee">
-                    <span class="h5 mb-1">Lost in the Echoes (feat. Symphony)</span>
+                <div class="marquee" id=>
+                    <span class="h5 mb-1" id="trackNameContainer"></span>
                 </div>
-                <p class="text-muted mb-0">Electronic Dreams • Album Name</p>
+                <p class="text-muted mb-0" id="artistNameContainer"></p>
             </div>
         </div>
 
