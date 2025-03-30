@@ -70,6 +70,7 @@ async function playlistSelectClick(idPlaylist){
     console.log(branoId);
     var response = await makeAddToPlaylistRequest("shared/actions/dataSource.php?addToPlaylist=1", idPlaylist, branoId);
     console.log(response);
+    searchClick(searchQ, fromPHP);
 }
 
 async function makeAddToPlaylistRequest(url, idPlaylist, idBrano){
