@@ -36,7 +36,7 @@
             $query->execute();
             $resultDb = $query->fetchAll(PDO::FETCH_ASSOC);
             
-            $host = "192.168.3.171";
+            $host = "192.168.1.225";
             $port = 8000;
             $socket = socket_create(AF_INET, SOCK_STREAM, 0);
             $res = socket_connect($socket, $host, $port);
@@ -71,7 +71,7 @@
     }
 
     if(isset($_GET["download"])){
-        $host = "192.168.3.171";
+        $host = "192.168.1.225";
         $port = 8000;
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $res = socket_connect($socket, $host, $port);
@@ -150,5 +150,22 @@
         catch (PDOException $e){
             echo "Error: " . $e->getMessage();
         }
+    }
+
+    if(isset($_GET["getPlaylistTracks"])){
+        $playlistId = $_GET["playlistId"];
+
+        try{
+            $query = $db -> prepare("SELECT * FROM tblBraniPlaylist INNER JOIN tblBrani ON tblBraniPlaylist.branoId = tblBrani.idBrano WHERE tblBraniPlaylist.playlistId = :playlistId");
+            $query -> bindParam(":playlistId", $playlistId);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($result);
+        }
+        catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+
     }
 ?>

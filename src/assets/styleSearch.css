@@ -12,3 +12,9 @@
     width: 10%;
     min-width: 80px;
 }
+
+.center {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}

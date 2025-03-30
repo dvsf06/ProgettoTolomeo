@@ -1,7 +1,11 @@
 var resp;
 var songToAddToPlaylist;
+var searchQ;
+var fromPHP;
 
 async function searchClick(query, isFromPHP) {
+    searchQ = query;
+    fromPHP = isFromPHP;
     if(!isFromPHP){
         resp = await makeRequest("shared/actions/dataSource.php?search=1", document.getElementById("searchInput").value);
     }
@@ -26,7 +30,8 @@ async function searchClick(query, isFromPHP) {
 
 async function downloadClick(element){
     var respDl = await makeDownloadRequest("shared/actions/dataSource.php?download=1", decodeURIComponent(element));
-    console.log(respDl);
+    console.log("DL_RESP=" + respDl);
+    searchClick(searchQ, fromPHP);
 }
 
 async function makeRequest(url, param){

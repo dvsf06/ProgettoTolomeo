@@ -97,7 +97,7 @@ def handle_request(d):
         conn_sock.close()
 
 
-hostname = "192.168.3.171"
+hostname = "192.168.1.225"
 port = 8000
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

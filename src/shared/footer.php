@@ -1,6 +1,7 @@
 <div class="container fixed-bottom z-10">
     <div class="audio-player">
-        <audio src='../tracks/Carlo Buti/Carlo Buti - Faccetta nera.mp3' preload=”metadata” loop></audio>
+        <iframe src="assets/silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe>
+        <audio src='' preload=”metadata” autoplay muted></audio>
         <!-- Track Info -->
         <div class="track-info">
             <img src="" alt="Album Cover" class="track-image" id="coverContainer">
@@ -26,13 +27,13 @@
             <button class="control-button">
                 <i class="fas fa-random fa-lg"></i>
             </button>
-            <button class="control-button">
+            <button class="control-button" onclick="buttonPrev()">
                 <i class="fas fa-step-backward fa-md"></i>
             </button>
             <button class="play-button" id="play-button">
                 <i class="fas fa-play fa-md"></i>
             </button>
-            <button class="control-button">
+            <button class="control-button" onclick="buttonNext()">
                 <i class="fas fa-step-forward fa-md"></i>
             </button>
             <div class="volume-control">
