@@ -70,4 +70,8 @@
             echo "Error: " . $e->getMessage();
         }
     }
+
+    if(isset($_GET["logout"])){
+        session_destroy();
+    }
 ?>
