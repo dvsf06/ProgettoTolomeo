@@ -1,0 +1,11 @@
+.playlist-card {
+    border-radius: 5px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background-color: #282828 !important;
+    color: #ffffff !important;
+}
+
+.playlist-card .btn {
+    background-color: #6367a4 !important;
+    border: 0 !important;
+}

@@ -1,7 +1,3 @@
-.mtn {
-    margin-top: 55px;
-}
-
 .form-control {
     width: calc(96% - max(10%, 80px)) !important;
     margin-right: 4%;

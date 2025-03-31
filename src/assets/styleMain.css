@@ -1,3 +1,10 @@
+body {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+    padding-top: 12vh !important;
+    padding-bottom: 30% !important;
+}
+
 .formCenter {
     box-sizing: border-box;
     position: absolute;
@@ -9,6 +16,28 @@
 }
 
 .mainTitle {
-    padding: 20px 0 !important;
     text-align: center !important;
+}
+
+.navbar {
+    background-color: #3f3f3f !important;
+}
+
+.navbar * {
+    color: #ffffff !important;
+}
+
+.navbar * button {
+    background-color: #4d5497;
+    border: 0;
+}
+
+.navbar * input {
+    background-color: #282828 !important;
+    border: 0.5px solid #202020;
+    color: #ffffff !important;
+}
+
+.navbar * input::placeholder {
+    color: #8b8b8b;
 }
