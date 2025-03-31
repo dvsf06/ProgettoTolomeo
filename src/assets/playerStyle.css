@@ -1,5 +1,5 @@
 .audio-player {
-    background: #aaa;
+    background: #575757;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     padding: 1.2%;
@@ -12,6 +12,7 @@
     align-items: center;
     padding-right: 30px;
     float: left;
+    width: 30%;
 }
 
 .track-image {
@@ -24,25 +25,26 @@
 
 .progress-bar {
     height: 6px;
-    background-color: #e9ecef;
     border-radius: 3px;
     position: relative;
     cursor: pointer;
     margin: 1rem 0;
+    width: 70%;
+    background: #34418a !important;
 }
 
 .progress {
     height: 100%;
-    background-color: #0d6efd;
     border-radius: 3px;
     width: 45%;
     transition: width 0.1s linear;
+    border: 0;
 }
 
 .progress-handle {
     width: 16px;
     height: 16px;
-    background-color: #0d6efd;
+    background-color: #4d5497;
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -66,19 +68,20 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: #6c757d;
+    color: #ffffff;
     transition: all 0.2s ease;
 }
 
 .control-button:hover {
-    color: #0d6efd;
+    transform: scale(1.1);
+    color: #34418a;
 }
 
 .play-button {
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background-color: #0d6efd;
+    background-color: #4d5497;
     color: white;
     display: flex;
     align-items: center;
@@ -88,7 +91,7 @@
 
 .play-button:hover {
     transform: scale(1.1);
-    background-color: #0b5ed7;
+    background-color: #34418a;
 }
 
 .volume-control {
@@ -108,7 +111,7 @@
 
 .volume-level {
     height: 100%;
-    background-color: #0d6efd;
+    background-color: #34418a;
     border-radius: 2px;
     width: 70%;
 }
@@ -118,7 +121,6 @@
     font-size: 0.875rem;
     font-weight: 500;
 }
-
 
 .marquee {
     white-space: nowrap;
@@ -133,7 +135,7 @@
 
 @keyframes marquee {
     0% {
-        transform: translateX(0);
+        transform: translateX(100%);
     }
 
     100% {

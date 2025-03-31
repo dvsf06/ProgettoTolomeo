@@ -140,6 +140,24 @@
         $branoId = $_GET["idBrano"];
 
         try{
+            $query = $db -> prepare("SELECT count(idBranoPlaylist) as nBrani FROM tblBraniPlaylist WHERE playlistId = :playlistId");
+            $query -> bindParam(":playlistId", $playlistId);
+            $query -> execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            if($result[0]["nBrani"] == 0){
+                $query = $db -> prepare("SELECT coverImage FROM tblBrani WHERE idBrano = :idBrano");
+                $query -> bindParam(":idBrano", $branoId);
+                $query -> execute();
+                $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                $cover = $result[0]["coverImage"];
+
+                $query = $db -> prepare("UPDATE tblPlaylists SET coverImage = :cover WHERE idPlaylist = :idPlaylist");
+                $query -> bindParam(":cover", $cover);
+                $query -> bindParam(":idPlaylist", $playlistId);
+                $query -> execute();
+            }
+
             $query = $db -> prepare("INSERT INTO tblBraniPlaylist (playlistId, branoId) VALUES (:playlistId, :branoId)");
             $query -> bindParam(":playlistId", $playlistId);
             $query -> bindParam(":branoId", $branoId);

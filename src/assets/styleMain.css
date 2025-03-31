@@ -32,12 +32,12 @@ body {
     border: 0;
 }
 
-.navbar * input {
+input {
     background-color: #282828 !important;
-    border: 0.5px solid #202020;
+    border: 0.5px solid #202020 !important;
     color: #ffffff !important;
 }
 
-.navbar * input::placeholder {
-    color: #8b8b8b;
+input::placeholder {
+    color: #8b8b8b !important;
 }

@@ -8,7 +8,13 @@
             $email = $_POST["email"];
             $password = $_POST["password"];
             $passwordConf = $_POST["passwordConfirm"];
+            $authCode = $_POST["authCode"];
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+            if($authCode != "CalliaBruciato06#!"){
+                exit("Auth-code non corretto");
+            }
+
             if($password != $passwordConf){
                 exit("Le password non coincidono");
             }

@@ -26,6 +26,12 @@
                 <label for="passwordConfirmInput" class="form-label">Conferma password</label>
                 <input type="password" class="form-control" id="passwordConfirmInput" name="passwordConfirm" placeholder="Password">
             </div>
+            
+            <div class="mb-3">
+                <label for="authCode" class="form-label">Auth-Code</label>
+                <input type="password" class="form-control" id="authCodeInput" name="authCode" placeholder="auth-code">
+            </div>
+
             <p>Hai già un account? <a href="index.php">Accedi</a></p>
             <button type="submit" class="btn btn-primary" name="registrazione" value="1">Registrati</button>
         </form>
