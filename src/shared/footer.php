@@ -1,6 +1,5 @@
 <div class="container fixed-bottom z-10">
     <div class="audio-player">
-        <iframe src="assets/silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe>
         <audio src='' preload=”metadata” autoplay muted></audio>
         <!-- Track Info -->
         <div class="track-info">
