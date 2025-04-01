@@ -35,6 +35,9 @@ async function downloadClick(element){
 }
 
 async function makeRequest(url, param){
+    if(param == ""){
+        return "{}";
+    }
     urlFull = url + '&titolo=' + param;
     const response = await fetch(urlFull);
     const data = await response.json();

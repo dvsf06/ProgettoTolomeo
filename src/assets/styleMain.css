@@ -37,6 +37,10 @@ body {
     border: 0;
 }
 
+.navbar-brand{
+    padding: 0 !important;
+}
+
 input {
     background-color: #282828 !important;
     border: 0.5px solid #202020 !important;

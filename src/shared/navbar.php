@@ -1,6 +1,8 @@
 <nav class="navbar fixed-top navbar-expand-md z-10">
     <div class="container-fluid">
-        <a class="navbar-brand" href="home.php">Home</a>
+        <a class="navbar-brand" href="home.php">
+            <img src="assets/images/logoNoText.png" height="38px">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContents" aria-controls="#navbarContents" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
         </button>
