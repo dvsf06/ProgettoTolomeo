@@ -8,7 +8,7 @@ window.onload = async() => {
 
     resp.forEach(element => {
         uriElement = encodeURIComponent(JSON.stringify(element));
-        document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element.coverImage + '"></td><td>' + element.titolo + '</td><td>' + element.nomeArtista + '</td><td>' + millisToMinutesAndSeconds(element.durata) + '</td><td><button class="btn btn-primary" onclick="playTrack(\''+ uriElement + '\')">Play icon</button></td></tr>';
+        document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element.coverImage + '"></td><td>' + element.titolo + '</td><td>' + element.nomeArtista + '</td><td>' + millisToMinutesAndSeconds(element.durata) + '</td><td><button class="btn btn-primary btn-play-song" onclick="playTrack(\''+ uriElement + '\')"><i class="bi bi-play-fill h4"></i></button></td></tr>';
         console.log(element["downloaded"]);
     });
 }

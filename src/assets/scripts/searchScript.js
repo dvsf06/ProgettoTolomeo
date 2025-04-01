@@ -18,11 +18,11 @@ async function searchClick(query, isFromPHP) {
     resp["items"].forEach(element => {
         if(element["downloaded"]){
             uriElement = encodeURIComponent(JSON.stringify(element));
-            document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["album"]["images"][0]["url"] + '"></td><td>' + element["name"] + '</td><td>' + element["artists"][0]["name"] + '</td><td>' + millisToMinutesAndSeconds(element["duration_ms"]) + '</td><td><button class="btn btn-primary" onclick="playTrack(\''+ uriElement + '\')"><i class="bi bi-play-fill"></i></button></td><td><button class="btn btn-success" onclick="addToPlaylistClick(\'' + uriElement + '\')"><i class="bi bi-plus-circle-fill"></i></button></td></tr>';
+            document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["album"]["images"][0]["url"] + '"></td><td>' + element["name"] + '</td><td>' + element["artists"][0]["name"] + '</td><td>' + millisToMinutesAndSeconds(element["duration_ms"]) + '</td><td><button class="btn btn-primary btn-play-song" onclick="playTrack(\''+ uriElement + '\')"><i class="bi bi-play-fill"></i></button></td><td><button class="btn btn-success btn-search-secondary" onclick="addToPlaylistClick(\'' + uriElement + '\')"><i class="bi bi-plus-circle-fill"></i></button></td></tr>';
         }
         else{
             uriElement = encodeURIComponent(JSON.stringify(element));
-            document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["album"]["images"][0]["url"] + '"></td><td>' + element["name"] + '</td><td>' + element["artists"][0]["name"] + '</td><td>' + millisToMinutesAndSeconds(element["duration_ms"]) + '</td><td colspan="2"><button class="btn btn-success" onclick="downloadClick(\'' + uriElement + '\')"><i class="bi-cloud-download"></i></button></td></tr>';
+            document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["album"]["images"][0]["url"] + '"></td><td>' + element["name"] + '</td><td>' + element["artists"][0]["name"] + '</td><td>' + millisToMinutesAndSeconds(element["duration_ms"]) + '</td><td colspan="2"><button class="btn btn-success btn-search-secondary" onclick="downloadClick(\'' + uriElement + '\')"><i class="bi-cloud-download"></i></button></td></tr>';
         }
         console.log(element["downloaded"]);
     });
@@ -59,9 +59,10 @@ async function addToPlaylistClick(element){
     songToAddToPlaylist = JSON.parse(track);
     playlists = await makePlaylistRequest("shared/actions/dataSource.php?getUserPlaylists=1", getCookie("idUtente"));
 
+    document.getElementById("tableHeader").innerHTML = '<tr><th>Img</th><th>Nome</th><th></th></tr>';
     document.getElementById("risBrani").innerHTML = "";
     playlists.forEach(element => {
-        document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + 'https://placehold.co/50.png' + '"></td><td>' + element["nome"] + '</td><td colspan="2"><button class="btn btn-success" onclick="playlistSelectClick(\'' + element["idPlaylist"] + '\')">Seleziona</button></td></tr>';
+        document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["coverImage"] + '"></td><td>' + element["nome"] + '</td><td colspan="2"><button class="btn btn-success btn-search-secondary" onclick="playlistSelectClick(\'' + element["idPlaylist"] + '\')"><i class="bi bi-plus-circle-fill"></i></button></td></tr>';
     });
 }
 

@@ -32,6 +32,11 @@ body {
     border: 0;
 }
 
+.navbar * button:hover {
+    background-color: #34418a;
+    border: 0;
+}
+
 input {
     background-color: #282828 !important;
     border: 0.5px solid #202020 !important;
@@ -40,4 +45,38 @@ input {
 
 input::placeholder {
     color: #8b8b8b !important;
+}
+
+.table {
+    margin-top: 30px !important;
+}
+
+.btn-play-all{
+    margin-top: 30px !important;
+    background-color: #34418a !important;
+    color: #ffffff !important;
+    border: 0 !important;
+}
+
+.btn-search{
+    background-color: #34418a !important;
+    color: #ffffff !important;
+    border: 0 !important;
+}
+
+.btn-search-secondary{
+    background-color: #747478 !important;
+    border: 0 !important;
+}
+
+.btn-search:hover{
+    background-color: #28336d !important;
+    color: #ffffff !important;
+    border: 0 !important;
+}
+
+.btn-play-song {
+    background-color: #8f90be !important;
+    color: #ffffff !important;
+    border: 0 !important;
 }

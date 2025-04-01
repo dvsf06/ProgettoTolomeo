@@ -17,11 +17,11 @@
     <div class="container-md">
         <div class="mtn">
             <input type="text" class="form-control mb-3" name="searchQuery" id="searchInput" placeholder="Cerca">
-            <button class="btn btn-primary" onclick="searchClick()">Cerca</button>
+            <button class="btn btn-primary btn-search" onclick="searchClick()">Cerca</button>
         </div>
         <div>
             <table class="table" data-bs-theme="dark">
-                <thead>
+                <thead id="tableHeader">
                     <tr>
                         <th>Img</th>
                         <th>Titolo</th>
