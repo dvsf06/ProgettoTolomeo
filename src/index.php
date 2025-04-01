@@ -15,9 +15,10 @@
     <link rel="stylesheet" href="assets/styleMain.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
-    <div class="container-md">
-        <form class="formCenter" action="shared/actions/userHandling.php" method="POST">
+<body style="padding-top: 50px !important;">
+    <div class="container-sm">
+        <form class="formCenter" action="shared/actions/userHandling.php" method="POST" style="padding-bottom: 20px;">
+            <img src="assets/images/logo.png" height="200px">
             <div class="mb-3">
                 <label for="emailInput" class="form-label">Email</label>
                 <input type="email" class="form-control" id="emailInput" name="email" placeholder="name@example.com">
