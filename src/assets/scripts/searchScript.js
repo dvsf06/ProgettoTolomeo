@@ -15,6 +15,7 @@ async function searchClick(query, isFromPHP) {
     document.getElementById("risBrani").innerHTML = "";
     console.log(resp);
 
+    document.getElementById("tableHeader").innerHTML = '<tr><th>Img</th><th>Titolo</th><th>Artista</th><th>Durata</th><th>Disponibile</th><th>Aggiungi</th></tr>';
     resp["items"].forEach(element => {
         if(element["downloaded"]){
             uriElement = encodeURIComponent(JSON.stringify(element));

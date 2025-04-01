@@ -18,26 +18,12 @@ window.onload = async () => {
     }
 }
 
-async function logoutClick(){
-    var dt = await makeLogoutRequest();
-    console.log(dt);
-    window.location.replace("index.php");
-}
-
 async function makeRequest(url, param){
     urlFull = url + '&userId=' + param;
     const response = await fetch(urlFull);
     const data = await response.json();
     return data;
 }
-
-async function makeLogoutRequest(){
-    url = "shared/actions/userHandling.php?logout=1";
-    const response = await fetch(url);
-    const data = await response.text();
-    return data;
-}
-
 
 function getCookie(cname) {
     let name = cname + "=";

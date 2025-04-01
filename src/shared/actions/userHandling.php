@@ -56,6 +56,8 @@
             if(password_verify($password, $result[0]["passwordHash"])){
                 $_SESSION["idUtente"] = $result[0]["idUtente"];
                 setcookie("idUtente", $result[0]["idUtente"]);
+                $_SESSION["username"] =  $result[0]["username"];
+                $_SESSION["email"] =  $result[0]["email"];
                 header("Location: ../../home.php");
                 exit("Accesso eseguito, ciao ".$result[0]["username"]);
             }
@@ -73,5 +75,6 @@
 
     if(isset($_GET["logout"])){
         session_destroy();
+        header("Location: ../../index.php");
     }
 ?>

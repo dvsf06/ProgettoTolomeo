@@ -2,12 +2,12 @@ body {
     background-color: #121212 !important;
     color: #ffffff !important;
     padding-top: 12vh !important;
-    padding-bottom: 30% !important;
+    padding-bottom: 10% !important;
 }
 
 .formCenter {
     box-sizing: border-box;
-    position: absolute;
+    position: relative;
     left: 50%;
     transform: translateX(-50%);
     padding: 0 20px;
