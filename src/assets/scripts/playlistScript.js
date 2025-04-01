@@ -9,7 +9,6 @@ window.onload = async() => {
     resp.forEach(element => {
         uriElement = encodeURIComponent(JSON.stringify(element));
         document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element.coverImage + '"></td><td>' + element.titolo + '</td><td>' + element.nomeArtista + '</td><td>' + millisToMinutesAndSeconds(element.durata) + '</td><td><button class="btn btn-primary btn-play-song" onclick="playTrack(\''+ uriElement + '\')"><i class="bi bi-play-fill h4"></i></button></td></tr>';
-        console.log(element["downloaded"]);
     });
 }
 
@@ -58,11 +57,22 @@ function playPlaylist(){
     playState="pause";
 
     setCookie("playerPointer", playerPointer);
-    setCookie("playlist", JSON.stringify(resp));
+    setSession("playlist", JSON.stringify(resp));
 
     audio.play();
 }
 
 function setCookie(name,value) {
     document.cookie = name + "=" + (value || "");
+}
+
+async function setSession(key, value){
+    var r = await makeSetSessionRequest(key, value);
+}
+
+async function makeSetSessionRequest(key, value){
+    urlFull = 'shared/actions/sessionManagement.php?setSession=1&key=' + key + '&value=' + value;
+    const response = await fetch(urlFull);
+    const data = await response.text();
+    return data;
 }

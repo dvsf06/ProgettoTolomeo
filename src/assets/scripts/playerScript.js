@@ -51,8 +51,8 @@ audio.addEventListener('ended',function(){
     setCookie("playerPointer", playerPointer);
 });
 
-window.addEventListener('load', function(){
-    resp = JSON.parse(getCookie("playlist"));
+window.addEventListener('load', async function(){
+    resp = await getSession("playlist");
     console.log(resp);
     playerPointer = getCookie("playerPointer");
     if(playerPointer == ""){playerPointer = 0;}
@@ -130,4 +130,16 @@ function getCookie(cname) {
 
 function setCookie(name,value) {
     document.cookie = name + "=" + (value || "");
+}
+async function getSession(key){
+    var r = await makeGetSessionRequest(key);
+    console.log(r);
+    return r;
+}
+
+async function makeGetSessionRequest(key){
+    urlFull = 'shared/actions/sessionManagement.php?getSession=1&key=' + key;
+    const response = await fetch(urlFull);
+    const data = await response.json();
+    return data;
 }
