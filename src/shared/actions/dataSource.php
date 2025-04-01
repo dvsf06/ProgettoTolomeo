@@ -29,13 +29,7 @@
     }
 
     if(isset($_GET["search"])){
-        try{
-            $titolo = strtolower($_GET["titolo"]);
-            $query = $db->prepare("SELECT * FROM tblBrani INNER JOIN tblArtisti ON tblBrani.artistaId = tblArtisti.idArtista WHERE titolo = :titolo");
-            $query->bindParam(":titolo", $titolo);
-            $query->execute();
-            $resultDb = $query->fetchAll(PDO::FETCH_ASSOC);
-            
+        try{            
             $host = "192.168.1.225";
             $port = 8000;
             $socket = socket_create(AF_INET, SOCK_STREAM, 0);
@@ -51,14 +45,20 @@
             $resultApi = json_decode(rtrim($resultApi, "\n"), true);
 
             foreach ($resultApi["items"] as $itemApi){
-                foreach ($resultDb as $itemDb){
-                    if(strtolower($itemApi["name"]) == $itemDb["titolo"] && $itemApi["artists"][0]["name"] == $itemDb["nome"]){        
-                        $itemId = array_search($itemApi, $resultApi["items"]);     
-                        $resultApi["items"][$itemId]["downloaded"] = true;
-                        $resultApi["items"][$itemId]["dbId"] = $itemDb["idBrano"];
-                        $resultApi["items"][$itemId]["audioPath"] = $itemDb["percorsoFile"];
-                        $resultApi["items"][$itemId]["coverImage"] = $itemDb["coverImage"];
-                    }
+                $titolo = strtolower($itemApi["name"]);
+                $query = $db->prepare("SELECT * FROM tblBrani INNER JOIN tblArtisti ON tblBrani.artistaId = tblArtisti.idArtista WHERE titolo = :titolo");
+                $query->bindParam(":titolo", $titolo);
+                $query->execute();
+                $resultDb = $query->fetchAll(PDO::FETCH_ASSOC);
+                error_log("LOG: " . json_encode($resultDb));
+
+                $itemDb = $resultDb[0];
+                if(strtolower($itemApi["name"]) == $itemDb["titolo"] && $itemApi["artists"][0]["name"] == $itemDb["nome"]){        
+                    $itemId = array_search($itemApi, $resultApi["items"]);     
+                    $resultApi["items"][$itemId]["downloaded"] = true;
+                    $resultApi["items"][$itemId]["dbId"] = $itemDb["idBrano"];
+                    $resultApi["items"][$itemId]["audioPath"] = $itemDb["percorsoFile"];
+                    $resultApi["items"][$itemId]["coverImage"] = $itemDb["coverImage"];
                 }
             }
 
@@ -86,7 +86,7 @@
         try{
             $songAssoc = json_decode($_GET["song"], true);
 
-            $filename .= $songAssoc["name"] . ".mp3";
+            $filename = $songAssoc["name"] . ".mp3";
 
             $nomeArtista = $songAssoc["artists"][0]["name"];
 
@@ -126,8 +126,6 @@
             else{
                 throw new Exception("Error on artist Id dataSource.php:133");
             }
-            
-
         }
         catch (PDOException $e){
             echo "Error: " . $e->getMessage();
