@@ -22,7 +22,7 @@ async function searchClick(query, isFromPHP) {
             document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["album"]["images"][0]["url"] + '"></td><td>' + element["name"] + '</td><td>' + element["artists"][0]["name"] + '</td><td>' + millisToMinutesAndSeconds(element["duration_ms"]) + '</td><td><button class="btn btn-primary btn-play-song" onclick="playTrack(\''+ uriElement + '\')"><i class="bi bi-play-fill"></i></button></td><td><button class="btn btn-success btn-search-secondary" onclick="addToPlaylistClick(\'' + uriElement + '\')"><i class="bi bi-plus-circle-fill"></i></button></td></tr>';
         }
         else{
-            document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["album"]["images"][0]["url"] + '"></td><td>' + element["name"] + '</td><td>' + element["artists"][0]["name"] + '</td><td>' + millisToMinutesAndSeconds(element["duration_ms"]) + '</td><td colspan="2"><button class="btn btn-success btn-search-secondary" onclick="downloadClick(\'' + uriElement + '\')"><i class="bi-cloud-download"></i></button></td></tr>';
+            document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["album"]["images"][0]["url"] + '"></td><td>' + element["name"] + '</td><td>' + element["artists"][0]["name"] + '</td><td>' + millisToMinutesAndSeconds(element["duration_ms"]) + '</td><td colspan="2"><button class="btn btn-success btn-search-secondary" id="btn-' + uriElement + '" onclick="downloadClick(\'' + uriElement + '\')"><i class="bi-cloud-download"></span></button></td></tr>';
         }
         console.log(element["downloaded"]);
     });
@@ -30,6 +30,7 @@ async function searchClick(query, isFromPHP) {
 
 async function downloadClick(uriElement){
     console.log("button pressed");
+    document.getElementById("btn-" + uriElement).innerHTML = '<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div>';
     var element = decodeURI(uriElement).replace(/\\\'/g, "\'");
     console.log("Element: " + element);
     var respDl = await makeDownloadRequest("shared/actions/dataSource.php?download=1", element);
