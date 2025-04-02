@@ -30,7 +30,7 @@
 
     if(isset($_GET["search"])){
         try{            
-            $host = "192.168.1.225";
+            $host = "192.168.61.171";
             $port = 8000;
             $socket = socket_create(AF_INET, SOCK_STREAM, 0);
             $res = socket_connect($socket, $host, $port);
@@ -50,16 +50,17 @@
                 $query->bindParam(":titolo", $titolo);
                 $query->execute();
                 $resultDb = $query->fetchAll(PDO::FETCH_ASSOC);
-                error_log("LOG: " . json_encode($resultDb));
 
-                $itemDb = $resultDb[0];
-                if(strtolower($itemApi["name"]) == $itemDb["titolo"] && $itemApi["artists"][0]["name"] == $itemDb["nome"]){        
-                    $itemId = array_search($itemApi, $resultApi["items"]);     
-                    $resultApi["items"][$itemId]["downloaded"] = true;
-                    $resultApi["items"][$itemId]["dbId"] = $itemDb["idBrano"];
-                    $resultApi["items"][$itemId]["audioPath"] = $itemDb["percorsoFile"];
-                    $resultApi["items"][$itemId]["coverImage"] = $itemDb["coverImage"];
-                }
+                if(isset($resultDb[0])){
+                    $itemDb = $resultDb[0];
+                    if(strtolower($itemApi["name"]) == $itemDb["titolo"] && $itemApi["artists"][0]["name"] == $itemDb["nome"]){        
+                        $itemId = array_search($itemApi, $resultApi["items"]);     
+                        $resultApi["items"][$itemId]["downloaded"] = true;
+                        $resultApi["items"][$itemId]["dbId"] = $itemDb["idBrano"];
+                        $resultApi["items"][$itemId]["audioPath"] = $itemDb["percorsoFile"];
+                        $resultApi["items"][$itemId]["coverImage"] = $itemDb["coverImage"];
+                    }
+                }                
             }
 
             $jsonResult = json_encode($resultApi);
@@ -71,11 +72,17 @@
     }
 
     if(isset($_GET["download"])){
-        $host = "192.168.1.225";
+        $host = "192.168.61.171";
         $port = 8000;
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $res = socket_connect($socket, $host, $port);
-        $sentString = '{"action":"download","data":"'.json_decode($_GET["song"],true)["id"].'","title":"'.json_decode($_GET["song"],true)["name"].'","artists":'.json_encode(json_decode($_GET["song"], true)["artists"]).'}';
+        $sentString = '{"action":"download","data":"'.json_decode($_GET["song"],true)["id"].'","title":"'.json_decode($_GET["song"],true)["name"].'","artists":[';
+        $artists = json_decode($_GET["song"], true)["artists"];
+        foreach ($artists as $artist) {
+            $sentString .= '{"name":"'.$artist["name"].'"},';
+        }
+        $sentString = rtrim($sentString, ",");
+        $sentString .= ']}';
         socket_write($socket, $sentString, strlen($sentString));
         $resultApi = "";
         while($resp = socket_read($socket, 1024)){
@@ -84,7 +91,7 @@
         }
 
         try{
-            $songAssoc = json_decode($_GET["song"], true);
+            $songAssoc = json_decode(urldecode($_GET["song"]), true);
 
             $filename = $songAssoc["name"] . ".mp3";
 

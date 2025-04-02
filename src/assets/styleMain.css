@@ -91,6 +91,10 @@ input::placeholder {
     border: 0 !important;
 }
 
+.btn-search-secondary:hover{
+    background-color: #5b5b60 !important;
+}
+
 .btn-search:hover{
     background-color: #28336d !important;
     color: #ffffff !important;
@@ -101,4 +105,8 @@ input::placeholder {
     background-color: #8f90be !important;
     color: #ffffff !important;
     border: 0 !important;
+}
+
+.btn-play-song:hover {
+    background-color: #797bb1 !important;
 }

@@ -97,7 +97,7 @@ def handle_request(d):
         conn_sock.close()
 
 
-hostname = "192.168.1.225"
+hostname = "192.168.61.171"
 port = 8000
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -109,6 +109,7 @@ while True:
     print(f"Connection from {addr}")
     data = conn_sock.recv(100000)
     data = str(data).strip("b'")
-    data = json.loads(data)
+    data = data.replace("\\","")
     print(data)
+    data = json.loads(data)
     handle_request(data)

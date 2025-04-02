@@ -17,20 +17,22 @@ async function searchClick(query, isFromPHP) {
 
     document.getElementById("tableHeader").innerHTML = '<tr><th>Img</th><th>Titolo</th><th>Artista</th><th>Durata</th><th>Disponibile</th><th>Aggiungi</th></tr>';
     resp["items"].forEach(element => {
+        uriElement = encodeURI(JSON.stringify(element)).replace(/\'/g, "\\'");
         if(element["downloaded"]){
-            uriElement = encodeURIComponent(JSON.stringify(element));
             document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["album"]["images"][0]["url"] + '"></td><td>' + element["name"] + '</td><td>' + element["artists"][0]["name"] + '</td><td>' + millisToMinutesAndSeconds(element["duration_ms"]) + '</td><td><button class="btn btn-primary btn-play-song" onclick="playTrack(\''+ uriElement + '\')"><i class="bi bi-play-fill"></i></button></td><td><button class="btn btn-success btn-search-secondary" onclick="addToPlaylistClick(\'' + uriElement + '\')"><i class="bi bi-plus-circle-fill"></i></button></td></tr>';
         }
         else{
-            uriElement = encodeURIComponent(JSON.stringify(element));
             document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element["album"]["images"][0]["url"] + '"></td><td>' + element["name"] + '</td><td>' + element["artists"][0]["name"] + '</td><td>' + millisToMinutesAndSeconds(element["duration_ms"]) + '</td><td colspan="2"><button class="btn btn-success btn-search-secondary" onclick="downloadClick(\'' + uriElement + '\')"><i class="bi-cloud-download"></i></button></td></tr>';
         }
         console.log(element["downloaded"]);
     });
 }
 
-async function downloadClick(element){
-    var respDl = await makeDownloadRequest("shared/actions/dataSource.php?download=1", decodeURIComponent(element));
+async function downloadClick(uriElement){
+    console.log("button pressed");
+    var element = decodeURI(uriElement).replace(/\\\'/g, "\'");
+    console.log("Element: " + element);
+    var respDl = await makeDownloadRequest("shared/actions/dataSource.php?download=1", element);
     console.log("DL_RESP=" + respDl);
     searchClick(searchQ, fromPHP);
 }
