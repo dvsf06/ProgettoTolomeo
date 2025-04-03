@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS tblUtenti (
 CREATE TABLE IF NOT EXISTS tblPlaylists (
     idPlaylist INTEGER PRIMARY KEY AUTO_INCREMENT,
     nome CHAR(50) NOT NULL,
+    coverImage CHAR(150) NOT NULL,
     utenteId INTEGER NOT NULL,
     FOREIGN KEY (utenteId) REFERENCES tblUtenti(idUtente)
 );
@@ -25,6 +26,7 @@ CREATE TABLE IF NOT EXISTS tblBrani (
     titolo CHAR(50) NOT NULL,
     durata INTEGER NOT NULL,
     percorsoFile CHAR(100) NOT NULL,
+    coverImage CHAR(150) NOT NULL,
     artistaId INTEGER NOT NULL,
     FOREIGN KEY (artistaId) REFERENCES tblArtisti(idArtista)
 );
