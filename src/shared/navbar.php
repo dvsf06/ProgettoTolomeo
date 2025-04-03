@@ -1,5 +1,5 @@
 <script src="assets/scripts/scriptMain.js"></script>
-<nav class="navbar fixed-top navbar-expand-md z-10">
+<nav class="navbar fixed-top navbar-expand-md z-10 navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="home.php">
             <img src="assets/images/logoNoText.png" height="38px">
