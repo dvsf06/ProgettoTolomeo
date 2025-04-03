@@ -92,7 +92,11 @@ def handle_request(d):
         print(d["data"])
         print(d["artists"])
         dl_from_id(d["data"])
-        route_song(d["title"], d["artists"])
+
+        bytes_title = bytes.fromhex(d["title"].replace("x",""))
+        title = bytes_title.decode('utf-8')
+
+        route_song(title, d["artists"])
         conn_sock.send(("200" + "\n").encode())
         conn_sock.close()
 

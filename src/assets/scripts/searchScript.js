@@ -31,7 +31,7 @@ async function searchClick(query, isFromPHP) {
 async function downloadClick(uriElement){
     console.log("button pressed");
     document.getElementById("btn-" + uriElement).innerHTML = '<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div>';
-    var element = decodeURI(uriElement).replace(/\\\'/g, "\'");
+    var element = decodeURI(uriElement);//.replace(/\\\'/g, "\'");
     console.log("Element: " + element);
     var respDl = await makeDownloadRequest("shared/actions/dataSource.php?download=1", element);
     console.log("DL_RESP=" + respDl);

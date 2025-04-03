@@ -76,7 +76,8 @@
         $port = 8000;
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $res = socket_connect($socket, $host, $port);
-        $sentString = '{"action":"download","data":"'.json_decode($_GET["song"],true)["id"].'","title":"'.json_decode($_GET["song"],true)["name"].'","artists":[';
+        $hexTitle = strToHex(html_entity_decode(preg_replace("/U\+([0-9A-F]{4})/", "&#x\\1;", json_decode($_GET["song"],true)["name"]), ENT_NOQUOTES, 'UTF-8'));
+        $sentString = '{"action":"download","data":"'.json_decode($_GET["song"],true)["id"].'","title":"'.$hexTitle.'","artists":[';
         $artists = json_decode($_GET["song"], true)["artists"];
         foreach ($artists as $artist) {
             $sentString .= '{"name":"'.$artist["name"].'"},';
@@ -224,5 +225,13 @@
         catch (PDOException $e){
             echo "Error: " . $e->getMessage();
         }
+    }
+
+    function strToHex($string){
+        $hex='';
+        for ($i=0; $i < strlen($string); $i++){
+            $hex .= dechex(ord($string[$i]));
+        }
+        return $hex;
     }
 ?>
