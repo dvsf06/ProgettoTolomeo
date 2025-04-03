@@ -32,7 +32,10 @@
     <div class="container-md mtn" id="mainContainer">
         <h1 class="mainTitle" style="text-align: center;"><?php echo $_GET["nome"] ?></h1>
         <div>
-            <button class="btn btn-success center btn-play-all" onclick="playPlaylist()"><i class="bi bi-play-fill h1"></i></button>
+            <div class="buttons-playlist">
+                <button class="btn btn-success btn-play-all" onclick="playPlaylist()"><i class="bi bi-play-fill h1"></i></button>
+                <button class="btn btn-success btn-modify-playlist" onclick="modifyPlaylistClick()"><i class="bi bi-pencil h1"></i></button>
+            </div>
             <table class="table" <?php if($_SESSION["mode"] == "dark-mode"){echo 'data-bs-theme="dark"';}?>>
                 <tbody id="risBrani">
                 </tbody>

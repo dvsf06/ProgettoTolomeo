@@ -189,6 +189,20 @@
         catch (PDOException $e){
             echo "Error: " . $e->getMessage();
         }
+    }
 
+    if(isset($_GET["deleteFromPlaylist"])){
+        $idBranoPlaylist = $_GET["idBranoPlaylist"];
+
+        try{
+            $query = $db -> prepare("DELETE FROM tblBraniPlaylist WHERE idBranoPlaylist = :idBranoPlaylist");
+            $query -> bindParam(":idBranoPlaylist", $idBranoPlaylist);
+            $query -> execute();
+
+            echo "200";
+        }
+        catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
     }
 ?>

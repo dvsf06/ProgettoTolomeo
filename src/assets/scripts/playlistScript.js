@@ -1,7 +1,9 @@
 var resp;
 var playerPointer = 0;
 
-window.onload = async() => {
+var inModify = false;
+
+const loadPl = async () => {
     resp = await makeRequest("shared/actions/dataSource.php?getPlaylistTracks=1", currPlaylist);
     document.getElementById("risBrani").innerHTML = "";
     console.log(resp);
@@ -12,10 +14,42 @@ window.onload = async() => {
     });
 }
 
+window.onload = loadPl;
+
+async function modifyPlaylistClick(){
+    if(!inModify){
+        inModify = !inModify;
+        document.getElementById("risBrani").innerHTML = "";
+        resp.forEach(element => {
+            uriElement = encodeURIComponent(JSON.stringify(element));
+            document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element.coverImage + '"></td><td>' + capitalizeFirstLetter(element.titolo) + '</td><td>' + element.nome + '</td><td class="col-durata">' + millisToMinutesAndSeconds(element.durata) + '</td><td><button class="btn btn-primary btn-delete-song" onclick="removeTrackFromPlaylist(\''+ uriElement + '\')"><i class="bi bi-trash h5"></i></button></td></tr>';
+        });
+    }
+    else{
+        inModify = !inModify;
+        loadPl();
+    }
+    
+}
+
+async function removeTrackFromPlaylist(element){
+    var track = JSON.parse(decodeURIComponent(element));
+    var r = await makeDeleteRequest(track.idBranoPlaylist);
+    console.log("Delete: " + r);
+    loadPl();
+}
+
 async function makeRequest(url, param){
     urlFull = url + '&playlistId=' + param;
     const response = await fetch(urlFull);
     const data = await response.json();
+    return data;
+}
+
+async function makeDeleteRequest(idBranoPlaylist){
+    urlFull = 'shared/actions/dataSource.php?deleteFromPlaylist=1&idBranoPlaylist=' + idBranoPlaylist;
+    const response = await fetch(urlFull);
+    const data = await response.text();
     return data;
 }
 
