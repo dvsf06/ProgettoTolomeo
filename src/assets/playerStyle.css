@@ -160,3 +160,15 @@
         transform: translateX(0%);
     }
 }
+
+.light-mode .audio-player {
+    background: #c6c5cb;
+}
+
+.light-mode .control-button {
+    color: #6f6f72;
+}
+
+.light-mode .progress-bar {
+    border: 0 !important;
+}

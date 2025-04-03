@@ -30,7 +30,7 @@
 
     if(isset($_GET["search"])){
         try{            
-            $host = "192.168.61.171";
+            $host = "192.168.1.225";
             $port = 8000;
             $socket = socket_create(AF_INET, SOCK_STREAM, 0);
             $res = socket_connect($socket, $host, $port);
@@ -72,7 +72,7 @@
     }
 
     if(isset($_GET["download"])){
-        $host = "192.168.61.171";
+        $host = "192.168.1.225";
         $port = 8000;
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $res = socket_connect($socket, $host, $port);

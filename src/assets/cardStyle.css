@@ -9,3 +9,13 @@
     background-color: #6367a4 !important;
     border: 0 !important;
 }
+
+.light-mode .playlist-card {
+    background-color: #dfdee6 !important;
+    color: #000000 !important;
+}
+
+.light-mode .playlist-card .btn {
+    background-color: #494e88 !important;
+    border: 0 !important;
+}

@@ -65,6 +65,8 @@ window.addEventListener('load', async function(){
     seekSlider.value = time;
     audio.play();
     audio.muted = false;
+    playState="play";
+    changePlayState();
 })
 
 function playId(id){
@@ -80,7 +82,6 @@ function playId(id){
     artistContainer.innerText = trackObj.nome;
     coverContainer.src = coverLink;
     audio.src = "../" + audioPath;
-    playState="pause";
 }
 
 seekSlider.addEventListener('input', () => {

@@ -1,9 +1,13 @@
 <?php
     session_start();
-    error_log("a");
 
-    if(isset($_GET["setSession"])){
-        $_SESSION[$_GET["key"]] = $_GET["value"];
+    $postJson = json_decode(file_get_contents('php://input'), true);
+    error_log("JSON: " . print_r($postJson));
+
+    if(isset($postJson["setSession"])){
+        error_log("POST");
+        error_log($postJson["key"]);
+        $_SESSION[$postJson["key"]] = $postJson["value"];
         echo "200";
     }
 

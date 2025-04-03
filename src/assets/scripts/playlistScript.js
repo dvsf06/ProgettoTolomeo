@@ -38,7 +38,8 @@ function playTrack(element){
     artistContainer.innerText = trackObj.nome;
     coverContainer.src = coverLink;
     audio.src = "../" + audioPath;
-    playState="pause";
+    playState="play";
+    changePlayState();
     audio.play();
 }
 
@@ -72,8 +73,16 @@ async function setSession(key, value){
 }
 
 async function makeSetSessionRequest(key, value){
-    urlFull = 'shared/actions/sessionManagement.php?setSession=1&key=' + key + '&value=' + value;
-    const response = await fetch(urlFull);
+    url = 'shared/actions/sessionManagement.php';
+    const response = await fetch(url,
+        {
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify({"setSession": 1, "key": key, "value": value})
+        })
     const data = await response.text();
     return data;
 }

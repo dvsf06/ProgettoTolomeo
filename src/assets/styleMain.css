@@ -12,7 +12,6 @@ body {
     transform: translateX(-50%);
     padding: 0 20px;
     width: max(30vw, 400px);
-    background-color: #2c2c32;
     border-radius: 20px;
     align-content: center;
 }
@@ -39,6 +38,7 @@ body {
 
 .navbar {
     background-color: #3f3f3f !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .navbar * {
@@ -130,4 +130,64 @@ input::placeholder {
     .col-artista {
         width: 10% !important;
     }
+}
+
+
+
+
+
+.light-mode{
+    background-color: #ebeaf3 !important;
+    color: #000000 !important;
+}
+
+.light-mode .formCenter button {
+    background-color: #3f4889 !important;
+}
+
+.light-mode .formCenter a{
+    color: #3f4889;
+}
+
+.light-mode .navbar {
+    background-color: #d2d1d8 !important;
+}
+
+.light-mode .navbar * {
+    color: #000000 !important;
+}
+
+.light-mode .navbar * button {
+    background-color: #3f4889;
+}
+
+.light-mode .navbar * button:hover {
+    background-color: #3f4889;
+}
+
+.light-mode .navbar .btn {
+    color: #ffffff !important;
+}
+
+.light-mode input {
+    background-color: #dfdee6 !important;
+    border: 0.5px solid #e4dddd !important;
+    color: #000000 !important;
+}
+
+.light-mode .btn-play-all{
+    background-color: #3f4889 !important;
+}
+
+.light-mode .btn-search{
+    background-color: #3f4889 !important;
+}
+
+.light-mode .btn-search-secondary{
+    background-color: #bab9be !important;
+    border: 0 !important;
+}
+
+.light-mode .btn-search-secondary:hover{
+    background-color: #c6c5cb !important;
 }

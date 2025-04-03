@@ -1,3 +1,4 @@
+<script src="assets/scripts/scriptMain.js"></script>
 <nav class="navbar fixed-top navbar-expand-md z-10">
     <div class="container-fluid">
         <a class="navbar-brand" href="home.php">

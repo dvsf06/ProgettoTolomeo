@@ -1,3 +1,9 @@
+<?php
+    if(!isset($_SESSION["mode"])){
+        $_SESSION["mode"] = "dark-mode";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -8,7 +14,7 @@
     <link rel="stylesheet" href="assets/styleMain.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body style="padding-top: 50px !important;">
+<body style="padding-top: 50px !important;" class="<?php echo $_SESSION["mode"] ?>">
     <div class="container-md">
         <form class="formCenter" action="shared/actions/userHandling.php" method="POST" style="padding-bottom: 50px;">
             <img src="assets/images/logo.png" height="200px">
