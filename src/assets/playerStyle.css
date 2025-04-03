@@ -28,7 +28,8 @@
     border-radius: 3px;
     position: relative;
     cursor: pointer;
-    margin: 1rem 0;
+    margin-top: 5px;
+    margin-bottom: 1rem;
     width: 70%;
     background: #34418a !important;
 }
@@ -74,24 +75,25 @@
 
 .control-button:hover {
     transform: scale(1.1);
-    color: #34418a;
+    color: #4d5497;
 }
 
 .play-button {
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background-color: #4d5497;
+    background-color: #6367a4;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
+    border: 0;
 }
 
 .play-button:hover {
     transform: scale(1.1);
-    background-color: #34418a;
+    background-color: #4d5497;
 }
 
 .volume-control {
@@ -133,12 +135,22 @@
     animation: marquee 15s linear infinite;
 }
 
+.track-info-text {
+    width: calc(100% - 100px);
+}
+
+@media screen and (max-width: 770px) {
+    .track-info-text {
+        display: none !important;
+    }
+}
+
 @keyframes marquee {
     0% {
-        transform: translateX(100%);
+        transform: translateX(0%);
     }
 
     100% {
-        transform: translateX(-100%);
+        transform: translateX(0%);
     }
 }
