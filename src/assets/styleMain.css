@@ -78,6 +78,7 @@ input::placeholder {
     background-color: #34418a !important;
     color: #ffffff !important;
     border: 0 !important;
+    width: 80px !important;
 }
 
 .btn-search{
@@ -105,8 +106,20 @@ input::placeholder {
     background-color: #8f90be !important;
     color: #ffffff !important;
     border: 0 !important;
+    width: 40px !important;
+    padding: 6px !important;
 }
 
 .btn-play-song:hover {
     background-color: #797bb1 !important;
+}
+
+@media screen and (max-width: 770px) {
+    .col-durata {
+        display: none !important;
+    }
+
+    .col-artista {
+        width: 10% !important;
+    }
 }

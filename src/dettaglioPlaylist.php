@@ -30,15 +30,6 @@
         <div>
             <button class="btn btn-success center btn-play-all" onclick="playPlaylist()"><i class="bi bi-play-fill h1"></i></button>
             <table class="table" data-bs-theme="dark">
-                <thead>
-                    <tr>
-                        <th>Img</th>
-                        <th>Titolo</th>
-                        <th>Artista</th>
-                        <th>Durata</th>
-                        <th>Disponibile</th>
-                    </tr>
-                </thead>
                 <tbody id="risBrani">
                 </tbody>
             </table>

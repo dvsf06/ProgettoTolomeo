@@ -76,8 +76,8 @@ function playId(id){
     var coverContainer = document.getElementById("coverContainer");
     var nameContainer = document.getElementById("trackNameContainer");
     var artistContainer = document.getElementById("artistNameContainer");
-    nameContainer.innerText = trackObj.titolo;
-    artistContainer.innerText = trackObj.nomeArtista;
+    nameContainer.innerText = capitalizeFirstLetter(trackObj.titolo);
+    artistContainer.innerText = trackObj.nome;
     coverContainer.src = coverLink;
     audio.src = "../" + audioPath;
     playState="pause";
@@ -142,4 +142,8 @@ async function makeGetSessionRequest(key){
     const response = await fetch(urlFull);
     const data = await response.json();
     return data;
+}
+
+function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }

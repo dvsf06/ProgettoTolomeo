@@ -8,7 +8,7 @@ window.onload = async() => {
 
     resp.forEach(element => {
         uriElement = encodeURIComponent(JSON.stringify(element));
-        document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element.coverImage + '"></td><td>' + element.titolo + '</td><td>' + element.nomeArtista + '</td><td>' + millisToMinutesAndSeconds(element.durata) + '</td><td><button class="btn btn-primary btn-play-song" onclick="playTrack(\''+ uriElement + '\')"><i class="bi bi-play-fill h4"></i></button></td></tr>';
+        document.getElementById("risBrani").innerHTML += '<tr><td><img style="width: 50px;" src="' + element.coverImage + '"></td><td>' + capitalizeFirstLetter(element.titolo) + '</td><td>' + element.nome + '</td><td class="col-durata">' + millisToMinutesAndSeconds(element.durata) + '</td><td><button class="btn btn-primary btn-play-song" onclick="playTrack(\''+ uriElement + '\')"><i class="bi bi-play-fill h4"></i></button></td></tr>';
     });
 }
 
@@ -35,7 +35,7 @@ function playTrack(element){
     var nameContainer = document.getElementById("trackNameContainer");
     var artistContainer = document.getElementById("artistNameContainer");
     nameContainer.innerText = trackObj.titolo;
-    artistContainer.innerText = trackObj.nomeArtista;
+    artistContainer.innerText = trackObj.nome;
     coverContainer.src = coverLink;
     audio.src = "../" + audioPath;
     playState="pause";
@@ -51,8 +51,8 @@ function playPlaylist(){
     var coverContainer = document.getElementById("coverContainer");
     var nameContainer = document.getElementById("trackNameContainer");
     var artistContainer = document.getElementById("artistNameContainer");
-    nameContainer.innerText = trackObj.titolo;
-    artistContainer.innerText = trackObj.nomeArtista;
+    nameContainer.innerText = capitalizeFirstLetter(trackObj.titolo);
+    artistContainer.innerText = trackObj.nome;
     coverContainer.src = coverLink;
     playState="pause";
 
@@ -75,4 +75,8 @@ async function makeSetSessionRequest(key, value){
     const response = await fetch(urlFull);
     const data = await response.text();
     return data;
+}
+
+function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }

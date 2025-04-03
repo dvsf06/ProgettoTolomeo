@@ -5,6 +5,7 @@
     padding: 1.2%;
     max-width: 90vw;
     margin: 1rem auto;
+    padding-right: 20px;
 }
 
 .track-info {
@@ -24,6 +25,7 @@
 }
 
 .progress-bar {
+    box-sizing: border-box;
     height: 6px;
     border-radius: 3px;
     position: relative;
@@ -141,6 +143,10 @@
 
 @media screen and (max-width: 770px) {
     .track-info-text {
+        display: none !important;
+    }
+
+    .volume-control {
         display: none !important;
     }
 }

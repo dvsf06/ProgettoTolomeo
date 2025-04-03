@@ -179,7 +179,7 @@
         $playlistId = $_GET["playlistId"];
 
         try{
-            $query = $db -> prepare("SELECT * FROM tblBraniPlaylist INNER JOIN tblBrani ON tblBraniPlaylist.branoId = tblBrani.idBrano WHERE tblBraniPlaylist.playlistId = :playlistId");
+            $query = $db -> prepare("SELECT * FROM tblBraniPlaylist INNER JOIN tblBrani ON tblBraniPlaylist.branoId = tblBrani.idBrano INNER JOIN tblArtisti ON tblBrani.artistaId = tblArtisti.idArtista WHERE tblBraniPlaylist.playlistId = :playlistId;");
             $query -> bindParam(":playlistId", $playlistId);
             $query -> execute();
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
