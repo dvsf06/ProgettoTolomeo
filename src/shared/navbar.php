@@ -17,7 +17,7 @@
             </ul>
             <form class="d-flex" role="search" action="search.php" method="GET">
                 <input class="form-control me-2" type="search" name="searchQuery" placeholder="Cerca">
-                <button class="btn btn-success" type="submit">Cerca</button>
+                <button class="btn btn-success btn-search-nav" type="submit">Cerca</button>
             </form>
         </div>       
     </div>

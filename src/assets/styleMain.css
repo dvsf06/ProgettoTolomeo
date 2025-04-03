@@ -81,6 +81,14 @@ input::placeholder {
     width: 80px !important;
 }
 
+.btn-search-nav {
+    width: 80px !important;
+}
+
+.btn-search-nav:active {
+    background-color: #1d265e !important;
+}
+
 .btn-search{
     background-color: #34418a !important;
     color: #ffffff !important;

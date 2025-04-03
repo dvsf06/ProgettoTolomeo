@@ -55,10 +55,12 @@
     const playButton = document.querySelector('.play-button');
     let isPlaying = false;
 
-    playButton.addEventListener('click', () => {
+    const changePlayState = () => {
         isPlaying = !isPlaying;
         playButton.innerHTML = isPlaying ? 
             '<i class="fas fa-pause fa-lg"></i>' : 
             '<i class="fas fa-play fa-lg"></i>';
-    });
+    }
+
+    playButton.addEventListener('click', changePlayState);
 </script>
