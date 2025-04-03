@@ -5,9 +5,10 @@
     color: #ffffff !important;
 }
 
-.playlist-card .btn {
+.playlist-card .btn-open-playlist {
     background-color: #6367a4 !important;
     border: 0 !important;
+    color: #ffffff !important;
 }
 
 .light-mode .playlist-card {
@@ -15,7 +16,13 @@
     color: #000000 !important;
 }
 
-.light-mode .playlist-card .btn {
+.light-mode .playlist-card .btn-open-playlist {
     background-color: #494e88 !important;
-    border: 0 !important;
+}
+
+.btn-delete-playlist {
+    color: #ffffff !important;
+    background-color: #f71717 !important;
+    border: 1px solid #ec1010 !important;
+    margin-left: 10px;
 }

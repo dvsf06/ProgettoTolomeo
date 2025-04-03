@@ -205,4 +205,24 @@
             echo "Error: " . $e->getMessage();
         }
     }
+
+    if(isset($_GET["deletePlaylist"])){
+        error_log("DELETE");
+        $idPlaylist = $_GET["idPlaylist"];
+
+        try{
+            $query = $db -> prepare("DELETE FROM tblBraniPlaylist WHERE playlistId = :idPlaylist");
+            $query -> bindParam(":idPlaylist", $idPlaylist);
+            $query -> execute();
+
+            $query = $db -> prepare("DELETE FROM tblPlaylists WHERE idPlaylist = :idPlaylist");
+            $query -> bindParam(":idPlaylist", $idPlaylist);
+            $query -> execute();
+
+            echo "200";
+        }
+        catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+    }
 ?>
